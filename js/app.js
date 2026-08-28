@@ -131,8 +131,12 @@ function updateConfirmEnabled() {
 
 document.querySelectorAll('.activity-btn').forEach((btn) => {
   btn.addEventListener('click', () => {
-    document.querySelectorAll('.activity-btn').forEach((b) => b.classList.remove('btn-secondary'));
+    document.querySelectorAll('.activity-btn').forEach((b) => {
+      b.classList.remove('btn-secondary');
+      b.setAttribute('aria-pressed', 'false');
+    });
     btn.classList.add('btn-secondary');
+    btn.setAttribute('aria-pressed', 'true');
     state.activity = btn.dataset.activity;
     otherInput.hidden = state.activity !== 'Other';
     if (state.activity === 'Other') otherInput.focus();
