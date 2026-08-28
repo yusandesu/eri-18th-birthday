@@ -1,5 +1,5 @@
 // js/app.js
-import { getRandomDodgePosition } from './logic.js';
+import { getRandomDodgePosition, getCalendarMonth } from './logic.js';
 
 const state = { day: null, time: null, activity: null, otherText: '' };
 
@@ -59,3 +59,46 @@ function setupDodge() {
     renderCalendar();
   }, { once: true });
 }
+
+const today = new Date();
+const todayISO = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+let calYear = today.getFullYear();
+let calMonth = today.getMonth();
+
+const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+function renderCalendar() {
+  const { weeks } = getCalendarMonth(calYear, calMonth, todayISO);
+  document.getElementById('calendar-label').textContent = `${MONTH_NAMES[calMonth]} ${calYear}`;
+
+  const grid = document.getElementById('calendar-grid');
+  grid.innerHTML = '';
+  weeks.flat().forEach((cell) => {
+    const div = document.createElement('div');
+    if (cell.day === null) {
+      div.className = 'calendar-cell empty';
+    } else {
+      div.className = 'calendar-cell' + (cell.disabled ? ' disabled' : '');
+      div.textContent = cell.day;
+      if (!cell.disabled) {
+        div.addEventListener('click', () => {
+          state.day = cell.iso;
+          showScene('scene-time');
+        });
+      }
+    }
+    grid.appendChild(div);
+  });
+}
+
+document.getElementById('prev-month').addEventListener('click', () => {
+  calMonth -= 1;
+  if (calMonth < 0) { calMonth = 11; calYear -= 1; }
+  renderCalendar();
+});
+
+document.getElementById('next-month').addEventListener('click', () => {
+  calMonth += 1;
+  if (calMonth > 11) { calMonth = 0; calYear += 1; }
+  renderCalendar();
+});
