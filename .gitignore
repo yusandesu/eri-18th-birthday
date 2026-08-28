@@ -1,3 +1,4 @@
 .superpowers/
 desktop.ini
 .worktrees/
+node_modules/
