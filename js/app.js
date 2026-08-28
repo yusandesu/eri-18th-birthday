@@ -1,5 +1,5 @@
 // js/app.js
-import { getRandomDodgePosition, getCalendarMonth } from './logic.js';
+import { getRandomDodgePosition, getCalendarMonth, buildSubmissionPayload } from './logic.js';
 
 const state = { day: null, time: null, activity: null, otherText: '' };
 
@@ -148,3 +148,35 @@ otherInput.addEventListener('input', () => {
   state.otherText = otherInput.value;
   updateConfirmEnabled();
 });
+
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/REPLACE_ME';
+
+confirmBtn.addEventListener('click', async () => {
+  const payload = buildSubmissionPayload(state);
+  showScene('scene-confirmation');
+  playOtterSequence();
+
+  try {
+    const res = await fetch(FORMSPREE_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    if (!res.ok) throw new Error('Formspree submission failed');
+  } catch (err) {
+    const fallback = document.getElementById('confirmation-fallback');
+    fallback.hidden = false;
+    fallback.textContent = `(Couldn't send automatically — tell him: ${payload.date}, ${payload.time}, ${payload.activity})`;
+  }
+});
+
+function playOtterSequence() {
+  const peek = document.getElementById('peek-otter');
+  const bye = document.getElementById('bye-otter');
+  peek.hidden = false;
+  bye.hidden = true;
+  setTimeout(() => {
+    peek.hidden = true;
+    bye.hidden = false;
+  }, 2500);
+}
