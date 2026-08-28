@@ -3,6 +3,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { getCalendarMonth } from '../js/logic.js';
 import { getRandomDodgePosition } from '../js/logic.js';
+import { buildSubmissionPayload } from '../js/logic.js';
 
 test('getCalendarMonth: grid covers every day of the month exactly once', () => {
   const { weeks } = getCalendarMonth(2026, 1, '2026-08-29'); // Feb 2026 (month is 0-indexed)
@@ -52,4 +53,19 @@ test('getRandomDodgePosition: real Math.random stays in bounds over many calls',
     assert.ok(pos.x >= 0 && pos.x <= 300);
     assert.ok(pos.y >= 0 && pos.y <= 250);
   }
+});
+
+test('buildSubmissionPayload: preset activity is used as-is', () => {
+  const payload = buildSubmissionPayload({ day: '2026-09-01', time: 'Evening', activity: 'Dinner', otherText: '' });
+  assert.deepEqual(payload, { date: '2026-09-01', time: 'Evening', activity: 'Dinner' });
+});
+
+test('buildSubmissionPayload: "Other" activity uses trimmed otherText', () => {
+  const payload = buildSubmissionPayload({ day: '2026-09-01', time: 'Morning', activity: 'Other', otherText: '  Board games  ' });
+  assert.deepEqual(payload, { date: '2026-09-01', time: 'Morning', activity: 'Board games' });
+});
+
+test('buildSubmissionPayload: "Other" with empty otherText yields empty activity', () => {
+  const payload = buildSubmissionPayload({ day: '2026-09-01', time: 'Afternoon', activity: 'Other', otherText: '' });
+  assert.deepEqual(payload, { date: '2026-09-01', time: 'Afternoon', activity: '' });
 });

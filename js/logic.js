@@ -31,3 +31,8 @@ export function getRandomDodgePosition(containerW, containerH, btnW, btnH, rng =
     y: Math.round(rng() * maxY),
   };
 }
+
+export function buildSubmissionPayload({ day, time, activity, otherText }) {
+  const finalActivity = activity === 'Other' ? (otherText || '').trim() : activity;
+  return { date: day, time, activity: finalActivity };
+}
