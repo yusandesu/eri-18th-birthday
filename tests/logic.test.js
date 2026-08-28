@@ -2,6 +2,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { getCalendarMonth } from '../js/logic.js';
+import { getRandomDodgePosition } from '../js/logic.js';
 
 test('getCalendarMonth: grid covers every day of the month exactly once', () => {
   const { weeks } = getCalendarMonth(2026, 1, '2026-08-29'); // Feb 2026 (month is 0-indexed)
@@ -33,4 +34,22 @@ test('getCalendarMonth: each day cell has a correct ISO date string', () => {
   const { weeks } = getCalendarMonth(2026, 7, '2026-08-15'); // Aug 2026
   const day1 = weeks.flat().find((c) => c.day === 1);
   assert.equal(day1.iso, '2026-08-01');
+});
+
+test('getRandomDodgePosition: rng=0 returns the top-left corner', () => {
+  const pos = getRandomDodgePosition(400, 300, 100, 50, () => 0);
+  assert.deepEqual(pos, { x: 0, y: 0 });
+});
+
+test('getRandomDodgePosition: rng=1 returns the bottom-right bound', () => {
+  const pos = getRandomDodgePosition(400, 300, 100, 50, () => 1);
+  assert.deepEqual(pos, { x: 300, y: 250 }); // containerW-btnW, containerH-btnH
+});
+
+test('getRandomDodgePosition: real Math.random stays in bounds over many calls', () => {
+  for (let i = 0; i < 500; i++) {
+    const pos = getRandomDodgePosition(400, 300, 100, 50);
+    assert.ok(pos.x >= 0 && pos.x <= 300);
+    assert.ok(pos.y >= 0 && pos.y <= 250);
+  }
 });

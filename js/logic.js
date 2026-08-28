@@ -22,3 +22,12 @@ export function getCalendarMonth(year, month, todayISO) {
   }
   return { year, month, weeks };
 }
+
+export function getRandomDodgePosition(containerW, containerH, btnW, btnH, rng = Math.random) {
+  const maxX = Math.max(containerW - btnW, 0);
+  const maxY = Math.max(containerH - btnH, 0);
+  return {
+    x: Math.round(rng() * maxX),
+    y: Math.round(rng() * maxY),
+  };
+}
