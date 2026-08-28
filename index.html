@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy 18th Birthday, Eri</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <section class="scene active" id="scene-message">
+    <img class="otter otter-corner" src="assets/otters/hello.gif" alt="">
+    <h1 class="script">Happy 18th Birthday, Eri</h1>
+    <p class="message">
+      <!-- PLACEHOLDER: replace with your own message -->
+      Eighteen years of you, and every one of them has made my world better.
+      Happy birthday. I love you.
+    </p>
+    <button class="btn" id="continue-btn">Continue</button>
+  </section>
+
+  <section class="scene" id="scene-question">
+    <img class="otter otter-corner" src="assets/otters/blush.gif" alt="">
+    <h2 class="script">Can we go on a date?</h2>
+    <div class="question-buttons">
+      <button class="btn" id="yes-btn">Yes</button>
+      <button class="btn btn-secondary" id="no-btn">No</button>
+    </div>
+  </section>
+
+  <section class="scene" id="scene-calendar">
+    <h2 class="script">Pick a day</h2>
+    <div class="calendar">
+      <div class="calendar-header">
+        <button class="btn btn-small" id="prev-month">&larr;</button>
+        <span id="calendar-label"></span>
+        <button class="btn btn-small" id="next-month">&rarr;</button>
+      </div>
+      <div class="calendar-grid" id="calendar-grid"></div>
+    </div>
+  </section>
+
+  <section class="scene" id="scene-time">
+    <h2 class="script">Pick a time</h2>
+    <div class="option-buttons">
+      <button class="btn time-btn" data-time="Morning">Morning</button>
+      <button class="btn time-btn" data-time="Afternoon">Afternoon</button>
+      <button class="btn time-btn" data-time="Evening">Evening</button>
+    </div>
+  </section>
+
+  <section class="scene" id="scene-activity">
+    <h2 class="script">What do you want to do?</h2>
+    <div class="option-buttons">
+      <button class="btn activity-btn" data-activity="Dinner">Dinner</button>
+      <button class="btn activity-btn" data-activity="Movie">Movie</button>
+      <button class="btn activity-btn" data-activity="Cafe / dessert">Cafe / dessert</button>
+      <button class="btn activity-btn" data-activity="Outdoors">Outdoors</button>
+      <button class="btn activity-btn" data-activity="Other">Other</button>
+    </div>
+    <input type="text" id="other-input" class="text-input" placeholder="What do you want to do?" hidden>
+    <button class="btn" id="confirm-btn" disabled>Confirm</button>
+  </section>
+
+  <section class="scene" id="scene-confirmation">
+    <img class="otter otter-center" id="peek-otter" src="assets/otters/peek.gif" alt="">
+    <img class="otter otter-center" id="bye-otter" src="assets/otters/bye.gif" alt="" hidden>
+    <h2 class="script">It's a date!</h2>
+    <p id="confirmation-fallback" class="message" hidden></p>
+  </section>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
