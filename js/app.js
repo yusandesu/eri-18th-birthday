@@ -113,3 +113,34 @@ document.getElementById('next-month').addEventListener('click', () => {
   if (calMonth > 11) { calMonth = 0; calYear += 1; }
   renderCalendar();
 });
+
+document.querySelectorAll('.time-btn').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    state.time = btn.dataset.time;
+    showScene('scene-activity');
+  });
+});
+
+const otherInput = document.getElementById('other-input');
+const confirmBtn = document.getElementById('confirm-btn');
+
+function updateConfirmEnabled() {
+  const hasActivity = state.activity && (state.activity !== 'Other' || otherInput.value.trim().length > 0);
+  confirmBtn.disabled = !hasActivity;
+}
+
+document.querySelectorAll('.activity-btn').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.activity-btn').forEach((b) => b.classList.remove('btn-secondary'));
+    btn.classList.add('btn-secondary');
+    state.activity = btn.dataset.activity;
+    otherInput.hidden = state.activity !== 'Other';
+    if (state.activity === 'Other') otherInput.focus();
+    updateConfirmEnabled();
+  });
+});
+
+otherInput.addEventListener('input', () => {
+  state.otherText = otherInput.value;
+  updateConfirmEnabled();
+});
