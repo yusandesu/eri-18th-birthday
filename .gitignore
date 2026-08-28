@@ -1,3 +1,5 @@
 .superpowers/
 desktop.ini
 .worktrees/
+.playwright-mcp/
+node_modules/
