@@ -80,10 +80,21 @@ function renderCalendar() {
     } else {
       div.className = 'calendar-cell' + (cell.disabled ? ' disabled' : '');
       div.textContent = cell.day;
-      if (!cell.disabled) {
-        div.addEventListener('click', () => {
+      if (cell.disabled) {
+        div.setAttribute('aria-disabled', 'true');
+      } else {
+        div.setAttribute('tabindex', '0');
+        div.setAttribute('role', 'button');
+        const selectDay = () => {
           state.day = cell.iso;
           showScene('scene-time');
+        };
+        div.addEventListener('click', selectDay);
+        div.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            if (event.key === ' ') event.preventDefault();
+            selectDay();
+          }
         });
       }
     }
