@@ -19,9 +19,10 @@ function setupDodge() {
   const yesBtn = document.getElementById('yes-btn');
   const container = scene.querySelector('.question-buttons');
 
-  const rect = container.getBoundingClientRect();
-  noBtn.style.left = `${yesBtn.offsetWidth + 20}px`;
-  noBtn.style.top = '0px';
+  const yesRect = yesBtn.getBoundingClientRect();
+  const containerRect = container.getBoundingClientRect();
+  noBtn.style.left = `${yesRect.right - containerRect.left + 20}px`;
+  noBtn.style.top = `${yesRect.top - containerRect.top}px`;
 
   function dodge() {
     const containerRect = container.getBoundingClientRect();

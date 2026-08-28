@@ -82,6 +82,11 @@ h1.script, h2.script {
   height: 60px;
 }
 
+#yes-btn {
+  position: relative;
+  z-index: 1;
+}
+
 #no-btn {
   position: absolute;
 }
