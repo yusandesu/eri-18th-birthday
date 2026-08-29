@@ -161,7 +161,7 @@ document.getElementById('back-to-time').addEventListener('click', () => {
   showScene('scene-time');
 });
 
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/REPLACE_ME';
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mkjnnljg';
 
 confirmBtn.addEventListener('click', async () => {
   const payload = buildSubmissionPayload(state);
