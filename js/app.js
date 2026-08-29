@@ -17,22 +17,21 @@ function setupDodge() {
   const scene = document.getElementById('scene-question');
   const noBtn = document.getElementById('no-btn');
   const yesBtn = document.getElementById('yes-btn');
-  const container = scene.querySelector('.question-buttons');
 
   const yesRect = yesBtn.getBoundingClientRect();
-  const containerRect = container.getBoundingClientRect();
-  noBtn.style.left = `${yesRect.right - containerRect.left + 20}px`;
-  noBtn.style.top = `${yesRect.top - containerRect.top}px`;
+  const sceneRect = scene.getBoundingClientRect();
+  noBtn.style.left = `${yesRect.right - sceneRect.left + 20}px`;
+  noBtn.style.top = `${yesRect.top - sceneRect.top}px`;
 
   let dodgeCount = 0;
   const maxYesScale = 2.5;
   const yesScaleStep = 0.15;
 
   function dodge() {
-    const containerRect = container.getBoundingClientRect();
+    const sceneRect = scene.getBoundingClientRect();
     const pos = getRandomDodgePosition(
-      containerRect.width,
-      containerRect.height,
+      sceneRect.width,
+      sceneRect.height,
       noBtn.offsetWidth,
       noBtn.offsetHeight
     );

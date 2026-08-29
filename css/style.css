@@ -83,10 +83,14 @@ h1.script, h2.script {
 }
 
 .question-buttons {
-  position: relative;
   width: 100%;
   max-width: 320px;
   height: 60px;
+}
+
+#yes-btn,
+#no-btn {
+  min-width: 96px;
 }
 
 #yes-btn {
