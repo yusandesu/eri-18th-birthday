@@ -3,11 +3,11 @@
 ## Before sharing the link
 
 1. **Write your message.** Open `index.html`, find the `<p class="message">` inside `scene-message`, and replace the placeholder text with your own.
-2. **Set up Formspree** (so her picks get emailed to you):
-   - Sign up free at https://formspree.io using yu.hatta3274@outlook.com.
+2. **Set up Formspree** (so her picks get emailed to you) — already done for this site, but for reference:
+   - Sign up free at https://formspree.io with the email you want notifications sent to.
    - Create a new form, verify the email when Formspree sends the confirmation.
    - Copy the form endpoint (looks like `https://formspree.io/f/abcdwxyz`).
-   - Open `js/app.js` and replace `FORMSPREE_ENDPOINT`'s placeholder value with your real endpoint.
+   - Open `js/app.js` and replace `FORMSPREE_ENDPOINT`'s value with your real endpoint.
 3. **Test locally** before deploying:
    ```bash
    npx serve .
