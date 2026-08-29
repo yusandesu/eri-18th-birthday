@@ -24,6 +24,10 @@ function setupDodge() {
   noBtn.style.left = `${yesRect.right - containerRect.left + 20}px`;
   noBtn.style.top = `${yesRect.top - containerRect.top}px`;
 
+  let dodgeCount = 0;
+  const maxYesScale = 2.5;
+  const yesScaleStep = 0.15;
+
   function dodge() {
     const containerRect = container.getBoundingClientRect();
     const pos = getRandomDodgePosition(
@@ -34,15 +38,11 @@ function setupDodge() {
     );
     noBtn.style.left = `${pos.x}px`;
     noBtn.style.top = `${pos.y}px`;
-  }
 
-  scene.addEventListener('mousemove', (e) => {
-    const btnRect = noBtn.getBoundingClientRect();
-    const btnCenterX = btnRect.left + btnRect.width / 2;
-    const btnCenterY = btnRect.top + btnRect.height / 2;
-    const distance = Math.hypot(e.clientX - btnCenterX, e.clientY - btnCenterY);
-    if (distance < 80) dodge();
-  });
+    dodgeCount += 1;
+    const scale = Math.min(1 + dodgeCount * yesScaleStep, maxYesScale);
+    yesBtn.style.transform = `scale(${scale})`;
+  }
 
   noBtn.addEventListener('touchstart', (e) => {
     e.preventDefault();
@@ -57,8 +57,12 @@ function setupDodge() {
   document.getElementById('yes-btn').addEventListener('click', () => {
     showScene('scene-calendar');
     renderCalendar();
-  }, { once: true });
+  });
 }
+
+document.getElementById('back-to-question').addEventListener('click', () => {
+  showScene('scene-question');
+});
 
 const today = new Date();
 const todayISO = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
@@ -121,6 +125,10 @@ document.querySelectorAll('.time-btn').forEach((btn) => {
   });
 });
 
+document.getElementById('back-to-calendar').addEventListener('click', () => {
+  showScene('scene-calendar');
+});
+
 const otherInput = document.getElementById('other-input');
 const confirmBtn = document.getElementById('confirm-btn');
 
@@ -147,6 +155,10 @@ document.querySelectorAll('.activity-btn').forEach((btn) => {
 otherInput.addEventListener('input', () => {
   state.otherText = otherInput.value;
   updateConfirmEnabled();
+});
+
+document.getElementById('back-to-time').addEventListener('click', () => {
+  showScene('scene-time');
 });
 
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/REPLACE_ME';

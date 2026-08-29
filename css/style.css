@@ -75,6 +75,13 @@ h1.script, h2.script {
   padding: 6px 14px;
 }
 
+.btn-back {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  margin: 0;
+}
+
 .question-buttons {
   position: relative;
   width: 100%;
@@ -85,10 +92,12 @@ h1.script, h2.script {
 #yes-btn {
   position: relative;
   z-index: 1;
+  transition: transform 0.25s ease;
 }
 
 #no-btn {
   position: absolute;
+  transition: left 0.3s ease, top 0.3s ease;
 }
 
 .option-buttons {
@@ -149,10 +158,8 @@ h1.script, h2.script {
 }
 
 .otter-corner {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  width: 90px;
+  width: 160px;
+  margin-bottom: 8px;
 }
 
 .otter-center {
@@ -162,8 +169,6 @@ h1.script, h2.script {
 
 @media (max-width: 480px) {
   .otter-corner {
-    width: 60px;
-    top: 8px;
-    right: 8px;
+    width: 100px;
   }
 }
