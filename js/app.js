@@ -9,6 +9,35 @@ function showScene(id) {
 }
 
 document.getElementById('continue-btn').addEventListener('click', () => {
+  showScene('scene-letter');
+});
+
+const scroll = document.getElementById('scroll');
+const scrollBody = document.getElementById('scroll-body');
+const scrollHint = document.getElementById('scroll-hint');
+const letterContinueBtn = document.getElementById('letter-continue-btn');
+
+function openLetter() {
+  if (scroll.classList.contains('open')) return;
+  scroll.classList.add('open');
+  scrollBody.style.maxHeight = `${scrollBody.scrollHeight}px`;
+  scrollHint.classList.add('hidden');
+
+  scrollBody.addEventListener('transitionend', () => {
+    letterContinueBtn.hidden = false;
+    letterContinueBtn.classList.add('reveal');
+  }, { once: true });
+}
+
+scroll.addEventListener('click', openLetter);
+scroll.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' || e.key === ' ') {
+    if (e.key === ' ') e.preventDefault();
+    openLetter();
+  }
+});
+
+letterContinueBtn.addEventListener('click', () => {
   showScene('scene-question');
   setupDodge();
 });

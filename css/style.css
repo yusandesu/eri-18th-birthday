@@ -157,6 +157,81 @@ h1.script, h2.script {
   cursor: not-allowed;
 }
 
+.scroll {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 420px;
+  cursor: pointer;
+}
+
+.scroll:focus-visible {
+  outline: 3px solid var(--heading);
+  outline-offset: 4px;
+}
+
+.scroll-cap {
+  width: 88%;
+  height: 14px;
+  flex-shrink: 0;
+  background: var(--heading);
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);
+  transition: filter 0.2s ease;
+}
+
+.scroll:not(.open):hover .scroll-cap,
+.scroll:not(.open):focus-visible .scroll-cap {
+  filter: brightness(1.12);
+}
+
+.scroll-body {
+  width: 100%;
+  max-height: 22px;
+  overflow: hidden;
+  background: #fbf3e3;
+  border-left: 2px solid var(--heading);
+  border-right: 2px solid var(--heading);
+  box-sizing: border-box;
+  transition: max-height 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.scroll-body .message {
+  margin: 0;
+  padding: 22px;
+  text-align: left;
+  font-size: 1.05rem;
+  line-height: 1.75;
+  max-width: none;
+  opacity: 0;
+  transition: opacity 0.6s ease 0.35s;
+}
+
+.scroll.open .scroll-body .message {
+  opacity: 1;
+}
+
+.scroll.open {
+  cursor: default;
+}
+
+.scroll-hint {
+  font-size: 0.85rem;
+  color: var(--body);
+  opacity: 0.7;
+  margin-top: 8px;
+  transition: opacity 0.3s ease;
+}
+
+.scroll-hint.hidden {
+  opacity: 0;
+}
+
+#letter-continue-btn.reveal {
+  animation: fadeIn 0.6s ease;
+}
+
 .otter {
   width: 120px;
 }
