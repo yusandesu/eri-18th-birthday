@@ -83,9 +83,12 @@ h1.script, h2.script {
 }
 
 .question-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   max-width: 320px;
-  height: 60px;
+  min-height: 60px;
 }
 
 #yes-btn,
@@ -100,8 +103,11 @@ h1.script, h2.script {
 }
 
 #no-btn {
-  position: absolute;
   transition: left 0.3s ease, top 0.3s ease;
+}
+
+#no-btn.dodging {
+  position: absolute;
 }
 
 .option-buttons {

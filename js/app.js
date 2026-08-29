@@ -47,17 +47,21 @@ function setupDodge() {
   const noBtn = document.getElementById('no-btn');
   const yesBtn = document.getElementById('yes-btn');
 
-  const yesRect = yesBtn.getBoundingClientRect();
-  const sceneRect = scene.getBoundingClientRect();
-  noBtn.style.left = `${yesRect.right - sceneRect.left + 20}px`;
-  noBtn.style.top = `${yesRect.top - sceneRect.top}px`;
-
   let dodgeCount = 0;
   const maxYesScale = 2.5;
   const yesScaleStep = 0.15;
 
   function dodge() {
     const sceneRect = scene.getBoundingClientRect();
+
+    if (!noBtn.classList.contains('dodging')) {
+      const noRect = noBtn.getBoundingClientRect();
+      noBtn.style.left = `${noRect.left - sceneRect.left}px`;
+      noBtn.style.top = `${noRect.top - sceneRect.top}px`;
+      noBtn.classList.add('dodging');
+      noBtn.offsetHeight;
+    }
+
     const pos = getRandomDodgePosition(
       sceneRect.width,
       sceneRect.height,
