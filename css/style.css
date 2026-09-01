@@ -257,3 +257,15 @@ h1.script, h2.script {
     width: 100px;
   }
 }
+
+.scene-gif {
+  width: 160px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 480px) {
+  .scene-gif {
+    width: 120px;
+  }
+}
