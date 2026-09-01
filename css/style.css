@@ -261,7 +261,7 @@ h1.script, h2.script {
 .scene-gif {
   width: 160px;
   border-radius: 12px;
-  margin-bottom: 16px;
+  margin-bottom: 40px;
 }
 
 @media (max-width: 480px) {
