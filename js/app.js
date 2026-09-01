@@ -150,9 +150,21 @@ document.getElementById('next-month').addEventListener('click', () => {
   renderCalendar();
 });
 
+const dinnerBtn = document.querySelector('.activity-btn[data-activity="Dinner"]');
+
 document.querySelectorAll('.time-btn').forEach((btn) => {
   btn.addEventListener('click', () => {
     state.time = btn.dataset.time;
+
+    const hideDinner = state.time === 'Morning';
+    dinnerBtn.hidden = hideDinner;
+    if (hideDinner && state.activity === 'Dinner') {
+      dinnerBtn.classList.remove('btn-secondary');
+      dinnerBtn.setAttribute('aria-pressed', 'false');
+      state.activity = null;
+      updateConfirmEnabled();
+    }
+
     showScene('scene-activity');
   });
 });
